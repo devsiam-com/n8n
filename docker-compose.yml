@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  n8n:
+    container_name: n8n-devsiam 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: n8n-devsiam:latest
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    env_file:
+      - .env
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+      - ./data:/home/node/data
